@@ -1,51 +1,36 @@
+import { registerSceneTools } from './tools/scene-tools';
+import { registerCodeTools } from './tools/code-tools';
+import { registerAssetTools } from './tools/asset-tools';
+import { registerPrefabTools } from './tools/prefab-tools';
+import { registerComponentTools } from './tools/component-tools';
+import { registerDebugTools } from './tools/debug-tools';
+import { registerProjectTools } from './tools/project-tools';
+import { startHttpServer } from './http-server';
+
 /**
- * Cocos Creator MCP Server
- * 入口文件
+ * 启动 MCP 服务器
  */
-
-import { Editor, Menu } from '@editor-framework/editor';
-import { CocosMCPServer } from './mcp-server';
-
-// 扩展加载时执行
-export function load() {
-  console.log('[Cocos MCP Server] Loading...');
+function startMCPServer() {
+  console.log('🚀 启动 Cocos MCP Server...');
   
-  // 注册菜单
-  Menu.register('CocosMCPServer', {
-    label: 'Cocos MCP Server',
-    icon: path.join(__dirname, '../static/icon.png'),
-    submenu: [
-      {
-        label: '启动服务器',
-        click() {
-          CocosMCPServer.getInstance().start();
-        }
-      },
-      {
-        label: '停止服务器',
-        click() {
-          CocosMCPServer.getInstance().stop();
-        }
-      },
-      {
-        label: '打开控制面板',
-        click() {
-          Editor.Panel.open('cocos-mcp-server');
-        }
-      }
-    ]
+  startHttpServer(3000).catch(err => {
+    console.error('❌ 服务器启动失败:', err);
   });
 
-  console.log('[Cocos MCP Server] Loaded!');
+  // 打印工具统计
+  const sceneCount = registerSceneTools().length;
+  const codeCount = registerCodeTools().length;
+  const assetCount = registerAssetTools().length;
+  const prefabCount = registerPrefabTools().length;
+  const componentCount = registerComponentTools().length;
+  const debugCount = registerDebugTools().length;
+  const projectCount = registerProjectTools().length;
+  
+  const total = sceneCount + codeCount + assetCount + prefabCount + componentCount + debugCount + projectCount;
+  
+  console.log(`✅ 工具注册完成: 场景${sceneCount} | 代码${codeCount} | 资源${assetCount} | 预制体${prefabCount} | 组件${componentCount} | 调试${debugCount} | 项目${projectCount}`);
+  console.log(`📊 总工具数: ${total} 个`);
 }
 
-// 扩展卸载时执行
-export function unload() {
-  console.log('[Cocos MCP Server] Unloading...');
-  CocosMCPServer.getInstance().stop();
-  console.log('[Cocos MCP Server] Unloaded!');
-}
-
-// 声明 path
-declare const __dirname: string;
-import * as path from 'path';
+// 初始化
+startMCPServer();
