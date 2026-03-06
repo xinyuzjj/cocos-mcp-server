@@ -1,0 +1,24 @@
+{
+  "name": "cocos-mcp-server",
+  "version": "1.0.0",
+  "description": "Cocos Creator AI MCP Server - 让 AI 辅助开发 Cocos Creator 项目",
+  "author": "Your Name",
+  "license": "MIT",
+  "keywords": ["cocos", "mcp", "ai", "editor", "extension"],
+  "main": "dist/main.js",
+  "scripts": {
+    "build": "node scripts/build.js",
+    "watch": "node scripts/build.js --watch"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "@modelcontextprotocol/sdk": "^0.5.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.3.0",
+    "@types/node": "^20.10.0",
+    "@cocos/creator-types": "^3.8.0"
+  },
+  "package-version": "3.8.0",
+  "editor": ">=3.8.0"
+}
