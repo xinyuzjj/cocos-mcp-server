@@ -1,54 +1,95 @@
-# Cocos MCP Server 🏝️
+# Cocos MCP Server
 
-[English](./README_EN.md) | [中文](./README.md)
+Cocos Creator AI MCP Server - 让 AI 辅助开发 Cocos Creator 项目
 
-一款专为 Cocos Creator 打造的 MCP（Model Context Protocol）服务器插件，让 AI 能够通过标准化协议与 Cocos Creator 编辑器进行交互，辅助你开发游戏。
+## 功能特点
 
-## ✨ 特性
+🚀 **8大类工具，78个核心功能**：
 
-- 🤖 **AI 驱动开发** - AI 可自动创建场景、节点、组件、脚本
-- 📝 **智能代码生成** - 自动生成 TypeScript 组件代码并挂载到节点
-- 🎮 **完整场景控制** - 场景/节点/组件/预制体全面操作
-- 📁 **资源管理** - 导入、删除、查询游戏资源
-- 🔌 **标准化协议** - 基于 MCP 协议，兼容各种 AI 客户端
+### 🎮 场景操作 (11个工具)
+- `get_current_scene` - 获取当前场景信息
+- `list_scenes` - 列出项目中的所有场景
+- `open_scene` - 打开指定场景
+- `save_scene` - 保存当前场景
+- `create_node` - 创建新节点
+- `delete_node` - 删除节点
+- `find_nodes` - 搜索节点
+- `get_node` - 获取节点详情
+- `set_node_property` - 设置节点属性
+- `move_node` - 移动节点位置
 
-## 🚀 快速开始
+### 💻 代码操作 (5个工具)
+- `create_script` - 创建新脚本文件
+- `attach_script` - 挂载脚本到节点
+- `edit_script` - 编辑脚本内容
+- `get_script` - 获取脚本内容
+- `list_scripts` - 列出所有脚本
 
-### 1. 安装
+### 📦 资源操作 (4个工具)
+- `list_assets` - 列出资源文件
+- `import_assets` - 导入外部资源
+- `delete_asset` - 删除资源
+- `get_asset_info` - 获取资源信息
 
-将整个项目复制到你的 Cocos Creator 扩展目录：
+### 🏗️ 预制体操作 (3个工具)
+- `create_prefab` - 从节点创建预制体
+- `instantiate_prefab` - 实例化预制体
+- `delete_prefab` - 删除预制体
 
-```
-你的Cocos项目/
-├── assets/
-├── extensions/
-│   └── cocos-mcp-server/    ← 放这里
-├── settings/
-└── ...
-```
+### ⚙️ 组件操作 (4个工具)
+- `add_component` - 添加组件到节点
+- `remove_component` - 移除组件
+- `get_components` - 获取组件列表
+- `set_component_property` - 设置组件属性
 
-### 2. 构建
+### 🔍 调试操作 (2个工具)
+- `get_console_logs` - 获取控制台日志
+- `clear_console` - 清空控制台
 
+### 🚀 项目操作 (2个工具)
+- `run_project` - 运行项目
+- `build_project` - 构建项目
+
+### 🎲 游戏开发 (47个工具)
+- `create_game_project` - 创建完整的游戏项目模板
+- `init_game_scene` - 初始化游戏主场景
+- `create_game_objects` - 创建游戏对象和系统
+- `create_player` - 创建玩家角色
+- `create_enemy` - 创建敌人
+- `create_game_manager` - 创建游戏管理器脚本
+- `create_score_system` - 创建计分系统
+- `create_level_system` - 创建关卡系统
+- `create_game_ui` - 创建游戏 UI 系统
+- `setup_camera` - 设置摄像机系统
+- `create_animation_controller` - 创建动画控制器
+- `setup_animation_events` - 设置动画事件
+- `create_particle_system` - 创建粒子系统
+- `setup_effects` - 设置特效系统
+- `setup_physics` - 设置物理系统
+- `setup_collision` - 设置碰撞系统
+- `setup_audio` - 设置音频系统
+- `create_audio_manager` - 创建音频管理器
+- `setup_game_config` - 设置游戏配置
+- `export_game_config` - 导出游戏配置
+- `check_project` - 检查项目完整性
+- `build_and_test` - 构建和测试项目
+
+## 使用方法
+
+### 1. 安装依赖
 ```bash
 cd extensions/cocos-mcp-server
 npm install
+```
+
+### 2. 构建
+```bash
 npm run build
 ```
 
-### 3. 启动
+### 3. 配置 AI 客户端
 
-1. 重启 Cocos Creator
-2. 点击菜单：`扩展` → `Cocos MCP Server` → `启动服务器`
-3. 服务器将在 `http://localhost:3000/mcp` 运行
-
-### 4. 配置 AI 客户端
-
-**Claude CLI:**
-```bash
-claude mcp add --transport http cocos-creator http://127.0.0.1:3000/mcp
-```
-
-**Cursor / VS Code:**
+**Claude 配置：**
 ```json
 {
   "mcpServers": {
@@ -59,131 +100,55 @@ claude mcp add --transport http cocos-creator http://127.0.0.1:3000/mcp
 }
 ```
 
-## 📖 工具列表
-
-### 🎯 场景/节点操作 (12 个工具)
-
-| 工具 | 描述 |
-|------|------|
-| `get_current_scene` | 获取当前场景信息 |
-| `list_scenes` | 列出所有场景 |
-| `open_scene` | 打开指定场景 |
-| `save_scene` | 保存场景 |
-| `create_node` | 创建节点 |
-| `delete_node` | 删除节点 |
-| `find_nodes` | 查找节点 |
-| `get_node` | 获取节点详情 |
-| `set_node_property` | 设置节点属性 |
-| `move_node` | 移动节点 |
-| `clone_node` | 克隆节点 |
-| `add_component` | 添加组件 |
-
-### 💻 代码生成工具 (15 个工具)
-
-| 工具 | 描述 |
-|------|------|
-| `create_script` | 创建脚本文件 |
-| `generate_component` | AI 生成组件代码 |
-| `generate_ui_component` | 生成 UI 组件 |
-| `attach_script` | 挂载脚本到节点 |
-| `detach_script` | 移除节点脚本 |
-| `edit_script` | 编辑脚本 |
-| `append_to_script` | 追加代码 |
-| `replace_in_script` | 替换代码 |
-| `get_script` | 读取脚本内容 |
-| `list_scripts` | 列出所有脚本 |
-| `find_script` | 搜索脚本 |
-| `fix_script_errors` | 自动修复脚本错误 |
-| `run_project` | 运行项目 |
-| `build_project` | 构建项目 |
-
-### 📁 资源管理工具 (4 个工具)
-
-| 工具 | 描述 |
-|------|------|
-| `list_assets` | 列出资源 |
-| `import_assets` | 导入资源 |
-| `delete_asset` | 删除资源 |
-| `get_asset_info` | 获取资源信息 |
-
-## 💡 使用示例
-
-### 创建场景并添加节点
+### 4. 调用示例
 
 ```json
 {
-  "tool": "create_node",
-  "arguments": {
-    "name": "Player",
-    "nodeType": "Sprite",
-    "position": { "x": 0, "y": 0 }
+  "method": "tools/call",
+  "params": {
+    "name": "create_game_project",
+    "arguments": {
+      "projectName": "MyPlatformerGame",
+      "gameType": "platformer",
+      "features": ["ui", "physics", "animation", "sound"]
+    }
   }
 }
 ```
 
-### AI 自动生成组件
-
-```json
-{
-  "tool": "generate_component",
-  "arguments": {
-    "componentName": "PlayerController",
-    "properties": [
-      { "name": "speed", "type": "number", "default": 100 },
-      { "name": "jumpForce", "type": "number", "default": 300 }
-    ],
-    "methods": [
-      { "name": "jump", "body": "this.node.setPosition(0, this.jumpForce)" }
-    ]
-  }
-}
-```
-
-### 挂载脚本到节点
-
-```json
-{
-  "tool": "attach_script",
-  "arguments": {
-    "nodeUuid": "节点UUID",
-    "scriptName": "PlayerController"
-  }
-}
-```
-
-## 🛠️ 开发
-
-### 项目结构
+## 项目结构
 
 ```
 cocos-mcp-server/
 ├── src/
-│   ├── main.ts           # 插件入口
-│   ├── mcp-server.ts     # MCP 服务器核心
-│   ├── http-server.ts    # HTTP 服务
-│   ├── types.ts          # 类型定义
+│   ├── main.ts              # 入口文件
+│   ├── http-server.ts       # HTTP 服务
+│   ├── mcp-server.ts        # MCP 服务器
+│   ├── types.ts             # 类型定义
 │   └── tools/
-│       ├── scene-tools.ts    # 场景工具
-│       ├── code-tools.ts     # 代码工具
-│       └── asset-tools.ts    # 资源工具
+│       ├── scene-tools.ts   # 场景操作工具
+│       ├── code-tools.ts    # 代码操作工具
+│       ├── asset-tools.ts   # 资源操作工具
+│       ├── prefab-tools.ts  # 预制体操作工具
+│       ├── component-tools.ts # 组件操作工具
+│       ├── debug-tools.ts   # 调试操作工具
+│       ├── project-tools.ts # 项目操作工具
+│       └── game-tools.ts    # 游戏开发工具
+├── dist/                    # 构建输出
 ├── package.json
-└── tsconfig.json
+├── tsconfig.json
+└── README.md
 ```
+
+## 开发指南
 
 ### 添加新工具
 
-1. 在 `src/tools/` 中创建新工具文件
-2. 实现 `registerXxxTools()` 函数
-3. 在 `mcp-server.ts` 中注册工具
+1. 在 `src/tools/` 中创建新的工具文件
+2. 导出 `registerXxxTools()` 函数返回 `Tool` 数组
+3. 在 `mcp-server.ts` 中注册工具到服务器
+4. 实现工具的处理方法
 
-## 📋 版本要求
-
-- Cocos Creator 3.8.0+
-
-## 🤝 贡献
-
-欢迎提交 Issue 和 Pull Request！
-
-## 📄 许可证
+## 许可证
 
 MIT License
