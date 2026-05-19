@@ -1,10 +1,92 @@
 # Cocos MCP Server
 
+[![npm version](https://img.shields.io/npm/v/cocos-mcp-server.svg)](https://www.npmjs.com/package/cocos-mcp-server)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 Cocos Creator AI MCP Server - 让 AI 辅助开发 Cocos Creator 项目
+
+## 安装
+
+### 全局安装（推荐）
+
+```bash
+npm install -g cocos-mcp-server
+```
+
+### 本地安装
+
+```bash
+npm install cocos-mcp-server
+```
+
+## 快速开始
+
+### 1. 启动 MCP 服务器
+
+```bash
+# 全局安装后
+cocos-mcp
+
+# 或本地安装后
+npx cocos-mcp
+```
+
+服务器将在 `http://localhost:3000` 启动。
+
+### 2. 配置 AI 客户端
+
+**Claude Desktop 配置** (`claude_desktop_config.json`):
+
+```json
+{
+  "mcpServers": {
+    "cocos-creator": {
+      "url": "http://localhost:3000/mcp"
+    }
+  }
+}
+```
+
+### 3. 开始使用
+
+在 Claude 中直接询问：
+
+```
+帮我创建一个平台跳跃游戏场景
+```
+
+或调用具体工具：
+
+```json
+{
+  "method": "tools/call",
+  "params": {
+    "name": "create_game_project",
+    "arguments": {
+      "projectName": "MyGame",
+      "gameType": "platformer",
+      "features": ["physics", "animation", "sound"]
+    }
+  }
+}
+```
 
 ## 功能特点
 
 🚀 **8大类工具，78个核心功能**：
+
+| 分类 | 工具数量 | 描述 |
+|------|---------|------|
+| 🎮 场景操作 | 11 | 场景管理、节点操作、属性设置 |
+| 💻 代码操作 | 5 | 脚本创建、编辑、挂载 |
+| 📦 资源操作 | 4 | 资源导入、管理 |
+| 🏗️ 预制体操作 | 3 | 预制体创建、实例化 |
+| ⚙️ 组件操作 | 4 | 组件添加、配置 |
+| 🔍 调试操作 | 2 | 日志查看、控制台管理 |
+| 🚀 项目操作 | 2 | 项目运行、构建 |
+| 🎲 游戏开发 | 47 | 游戏对象、系统创建 |
+
+**总计：78 个工具**
 
 ### 🎮 场景操作 (11个工具)
 - `get_current_scene` - 获取当前场景信息
@@ -74,33 +156,14 @@ Cocos Creator AI MCP Server - 让 AI 辅助开发 Cocos Creator 项目
 - `check_project` - 检查项目完整性
 - `build_and_test` - 构建和测试项目
 
-## 使用方法
+## 使用示例
 
-### 1. 安装依赖
-```bash
-cd extensions/cocos-mcp-server
-npm install
-```
+查看 [examples/](./examples/) 目录获取更多详细示例：
 
-### 2. 构建
-```bash
-npm run build
-```
+- [创建平台跳跃游戏](./examples/create-platformer-game.md) - 完整的游戏开发示例
+- [创建 UI 系统](./examples/create-ui-system.md) - UI 界面开发示例
 
-### 3. 配置 AI 客户端
-
-**Claude 配置：**
-```json
-{
-  "mcpServers": {
-    "cocos-creator": {
-      "url": "http://localhost:3000/mcp"
-    }
-  }
-}
-```
-
-### 4. 调用示例
+### 快速调用示例
 
 ```json
 {
@@ -120,12 +183,12 @@ npm run build
 
 ```
 cocos-mcp-server/
-├── src/
+├── src/                     # 源代码
 │   ├── main.ts              # 入口文件
 │   ├── http-server.ts       # HTTP 服务
 │   ├── mcp-server.ts        # MCP 服务器
 │   ├── types.ts             # 类型定义
-│   └── tools/
+│   └── tools/               # 工具实现
 │       ├── scene-tools.ts   # 场景操作工具
 │       ├── code-tools.ts    # 代码操作工具
 │       ├── asset-tools.ts   # 资源操作工具
@@ -135,9 +198,17 @@ cocos-mcp-server/
 │       ├── project-tools.ts # 项目操作工具
 │       └── game-tools.ts    # 游戏开发工具
 ├── dist/                    # 构建输出
+├── examples/                # 使用示例
+│   ├── README.md
+│   ├── create-platformer-game.md
+│   └── create-ui-system.md
+├── .github/workflows/       # GitHub Actions
+│   └── release.yml
 ├── package.json
 ├── tsconfig.json
-└── README.md
+├── CHANGELOG.md
+├── README.md
+└── README_EN.md
 ```
 
 ## 开发指南
@@ -148,6 +219,14 @@ cocos-mcp-server/
 2. 导出 `registerXxxTools()` 函数返回 `Tool` 数组
 3. 在 `mcp-server.ts` 中注册工具到服务器
 4. 实现工具的处理方法
+
+## 相关链接
+
+- [English README](./README_EN.md)
+- [使用示例](./examples/)
+- [更新日志](./CHANGELOG.md)
+- [问题反馈](https://github.com/xinyuzjj/cocos-mcp-server/issues)
+- [项目主页](https://github.com/xinyuzjj/cocos-mcp-server#readme)
 
 ## 许可证
 
